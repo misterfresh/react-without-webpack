@@ -1,5 +1,4 @@
 import path from 'path'
-//import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from "rollup-plugin-replace";
@@ -7,7 +6,6 @@ import replace from "rollup-plugin-replace";
 let pkg = require('./package.json')
 let	external = Object.keys(pkg.dependencies || {})
 let fs = require('fs')
-//let babelRc = require('./.babelrc')
 
 let vendors = external.map(
 	dependency => {

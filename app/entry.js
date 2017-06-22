@@ -1,4 +1,3 @@
-console.log('jeje')
 import routes from 'routes/Routes'
 import Root from 'containers/Root'
 import configureStore from 'store/configureStore'
