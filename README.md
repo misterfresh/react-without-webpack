@@ -6,7 +6,7 @@ Using ES2015 native modules and HTTP2.
 
 ## Usage
 ```
-git clone react-without-webpack
+git clone git@github.com:misterfresh/react-without-webpack.git
 cd react-without-webpack
 yarn install (or npm install )
 node server.js
