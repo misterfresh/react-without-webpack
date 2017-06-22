@@ -8,14 +8,14 @@ Using ES2015 native modules and HTTP2.
 ```
 git clone git@github.com:misterfresh/react-without-webpack.git
 cd react-without-webpack
-npm install (or yarn install )
+npm install
 node server.js
 ```
 Open
 ```
 https://localhost:5000/
 ```
-on a browser with ES2015 native modules enabled. 
+in a browser with ES2015 native modules enabled. 
 I'm using Chrome Canary with the Experimental Web Platform flag activated. Proceed after the security warning to see the page.
 
 ## How it works
