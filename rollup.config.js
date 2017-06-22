@@ -7,6 +7,8 @@ let pkg = require('./package.json')
 let	external = Object.keys(pkg.dependencies || {})
 let fs = require('fs')
 
+let vendorsPath = path.join(process.cwd(), 'public/js/vendors/vendors')
+
 let vendors = external.map(
 	dependency => {
 		let dependencyVariable = dependency.split('-').map(
@@ -23,12 +25,12 @@ let vendors = external.map(
 			window.Component = React.Component;
 			window.fromJS = Immutable.default.fromJS
 		`
-fs.writeFileSync(path.join(process.cwd(), '/vendors/vendorsSource.js'), vendors)
+fs.writeFileSync(vendorsPath + '_temp.js', vendors)
 
 export default {
-	entry: path.join(process.cwd(), '/vendors/vendorsSource.js'),
-	dest: path.join(process.cwd(), '/vendors/vendors.js'),
-	sourceMap: path.join(process.cwd(), 'vendors/vendors.js.map'),
+	entry: vendorsPath + '_temp.js',
+	dest: vendorsPath + '.js',
+	sourceMap: vendorsPath + '.js.map',
 	moduleName: 'vendors',
 	format: 'iife',
 	plugins: [

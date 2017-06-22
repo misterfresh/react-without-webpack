@@ -30,10 +30,10 @@ server.use(logger('dev'))
 server.use(transformMiddleware)
 
 server.get('/', function(req, res, next){
-	res.sendFile(folder + '/index.html')
+	res.sendFile(folder + '/public/index.html')
 })
 
-server.use(express.static(folder))
+server.use(express.static(path.join(folder,'public')))
 
 http2
 	.createServer(options, server).listen(port, '0.0.0.0', (err) => {

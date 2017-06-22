@@ -1,10 +1,12 @@
 {
   "name": "react-without-webpack",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c"
+    "start": "node server.js",
+    "build": "rollup -c",
+    "postinstall": "./node_modules/mkdirp/bin/cmd.js public/js/vendors && npm run build"
   },
   "dependencies": {
     "aphrodite": "^1.2.1",
@@ -27,10 +29,10 @@
     "babel-plugin-transform-import-resolve": "^2.0.1",
     "babel-preset-react": "^6.24.1",
     "express": "^4.15.3",
+    "mkdirp": "^0.5.1",
     "morgan": "^1.8.2",
     "path": "^0.12.7",
     "rollup": "^0.43.0",
-    "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
