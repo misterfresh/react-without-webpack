@@ -16,4 +16,9 @@ const history = syncHistoryWithStore(ReactRouter.browserHistory, store, {
 ReactDom.render(
 	<Root store={store} history={history} routes={routes} />,
 	document.getElementById('root')
-);
+)
+
+let source = new EventSource("stream")
+source.addEventListener('message', function (event) {
+    console.log('updated', event.data)
+}, false)

@@ -10,7 +10,6 @@ System.config({
         "reducers/*":"./app/reducers/*",
         "routes/*":"./app/routes/*",
         "store/*":"./app/store/*",
-        "utils/*":"./app/utils/*",
-        "n/*":"./node_modules/*"
+        "utils/*":"./app/utils/*"
     }
 })

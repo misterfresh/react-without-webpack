@@ -12,7 +12,8 @@ const options = {
 	cert: fs.readFileSync('./certificates/server.crt')
 }
 
-let transformMiddleware = require('./transform-middleware/transform-middleware')
+let transformMiddleware = require('./express-middlewares/transform/transform-middleware')
+let updater = require('./express-middlewares/updater/updater-middleware')
 
 const port = process.env.PORT || 5000
 const server = express()
@@ -28,6 +29,11 @@ process.on('unhandledRejection', (reason, promise) => {
 server.use(logger('dev'))
 
 server.use(transformMiddleware)
+server.use(updater)
+
+server.get('/stream', function(req, res) {
+    res.sseSetup()
+})
 
 server.get('/', function(req, res, next){
 	res.sendFile(folder + '/public/index.html')
