@@ -33,7 +33,7 @@ class Home extends Component {
       />
 
       <div>Home{activeSlideId}</div>
-			<h3>j22jj</h3>
+			<h3>Welco demo</h3>
     </div>
   }
 }
