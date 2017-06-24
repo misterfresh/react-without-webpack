@@ -32,8 +32,8 @@ class Home extends Component {
         meta={[ {'name': 'description', 'content': "Welcome"} ]}
       />
 
-      <div>Home{activeSlideId}</div>
-			<h3>Welco demo</h3>
+      <div>Seems to be working</div>
+			<h3>Welcome22  cool</h3>
     </div>
   }
 }

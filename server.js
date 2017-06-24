@@ -14,6 +14,7 @@ const options = {
 
 let transformMiddleware = require('./middleware/transform/transform-middleware')
 let updater = require('./middleware/updater/updater-middleware')
+let push = require('./middleware/push/push-middleware')
 
 const port = process.env.PORT || 5000
 const server = express()
@@ -27,15 +28,17 @@ process.on('unhandledRejection', (reason, promise) => {
 })
 
 server.use(logger('dev'))
-server.use(transformMiddleware)
 server.use(updater)
+server.use(transformMiddleware)
 
 server.get('/stream', function(req, res) {
-    res.sseSetup()
+	res.sseSetup()
 })
 
+server.use(push)
+
 server.get('/', function(req, res, next){
-	res.sendFile(folder + '/public/index.html')
+	res.send(global.publicCache['index']['file'])
 })
 
 server.use(express.static(path.join(folder,'public')))
@@ -46,5 +49,5 @@ http2
         console.error(err);
         throw err;
     }
-    console.info('==> 🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
+    console.info('==> 🌎 Listening on port %s. Open up https://localhost:%s/ in your browser.', port, port);
 })

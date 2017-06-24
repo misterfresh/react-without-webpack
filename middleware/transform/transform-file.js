@@ -1,6 +1,7 @@
 let babel = require('babel-core')
 let cacheMap = {}
 let hashMap = {}
+let zlib = require('zlib')
 
 let sendTranspiled = require('./sendTranspiled')
 let fileLastModifiedHash = require('./file-last-modified-hash')
@@ -17,14 +18,18 @@ function transformFile(req, res, conf){
 			if (lastKnownHash && lastKnownHash === lastModifiedHash) {
 				sendTranspiled(res, cacheMap[lastKnownHash], true)
 			} else {
-				babel.transformFile(src, conf, function (err, result) {
+				babel.transformFile(src, conf, function (err, transpiled) {
 					if(err){
-						console.log(err)
 						return res.status(500).send('Error transpiling')
 					}
-					sendTranspiled(res, result.code)
-					hashMap[src]=lastModifiedHash
-					cacheMap[lastModifiedHash] = result.code
+					zlib.gzip(transpiled.code, function(err, gzipped){
+						if(err){
+							return res.status(500).send('Error gzipping')
+						}
+						sendTranspiled(res, gzipped)
+						hashMap[src]=lastModifiedHash
+						cacheMap[lastModifiedHash] = gzipped
+					})
 				})
 			}
 		}
