@@ -1,3 +1,4 @@
+import {fromJS} from 'immutable'
 import {
   SET_ACTIVE_MAIN_LINK
 } from 'constants/constants'

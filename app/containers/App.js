@@ -1,11 +1,12 @@
+import React, {Component} from 'react'
 import * as DisplayActions from 'actions/display'
 import Page from 'components/Layout/Page'
 
-let { Helmet } = ReactHelmet
-let { bindActionCreators } = Redux
-let {connect} = ReactRedux
+import {Helmet} from 'react-helmet'
+import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
 
-class App extends React.Component {
+class App extends Component {
 
   static readyOnActions(dispatch) {
     return Promise.all([

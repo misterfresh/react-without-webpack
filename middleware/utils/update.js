@@ -10,7 +10,7 @@ let conf = JSON.parse(require('fs').readFileSync(
 	path.join(process.cwd(), '.babelrc'), 'utf-8')
 )
 conf.babelrc = false
-conf.plugins.push([resolveToUrl])
+conf.plugins = [[resolveToUrl]]
 
 function update(file){
 	return Promise.all([

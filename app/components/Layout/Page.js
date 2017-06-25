@@ -1,3 +1,4 @@
+import React from 'react'
 let Page = ({children})=> <div className="container">
 	<div className="row">
 		<div className="col">

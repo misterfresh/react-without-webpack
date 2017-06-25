@@ -2,15 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import {browserHistory} from 'react-router'
-import { StyleSheet } from 'aphrodite'
-import { fromJS } from 'immutable'
-import { syncHistoryWithStore } from 'react-router-redux';
+import {fromJS} from 'immutable'
 
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import routes from 'routes/Routes'
 import Root from 'containers/Root'
 import configureStore from 'store/configureStore'
-//let { syncHistoryWithStore } = ReactRouterRedux
 
 let initialState = {}
 

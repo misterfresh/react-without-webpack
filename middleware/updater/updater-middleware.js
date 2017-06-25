@@ -19,7 +19,7 @@ function updater(req, res, next){
 					updatedCache => {
 						let fileUri = filePath.split(process.cwd())[1]
 						fileUri = fileUri.replace(/\\/gi, '/')
-						console.log(fileUri)
+						//console.log(fileUri)
 						res.write("data: " + fileUri + "\n\n")
 					}
 				)

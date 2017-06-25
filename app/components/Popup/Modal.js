@@ -1,3 +1,4 @@
+import React from 'react'
 let Modal = ({children}) =>
   <div>
     <div className='modal-backdrop in' />

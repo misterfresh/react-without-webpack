@@ -1,6 +1,6 @@
 'use strict'
 
-let {combineReducers} = ReduxImmutable
+import {combineReducers} from 'redux-immutable'
 
 import route from './route'
 import display from './display'

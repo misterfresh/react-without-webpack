@@ -13,7 +13,7 @@ function push(res, path, file, contentType){
 		}
 	})
 	stream.on('error', function(err) {
-		console.log('link', path, 'push error', err)
+		//console.log('link', path, 'push error', err)
 	})
 
 	stream.end(file)

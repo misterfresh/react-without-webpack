@@ -1,5 +1,3 @@
-'use strict'
-
 import {
   SET_ACTIVE_JOB_ADS_SLIDE
 } from 'constants/constants'

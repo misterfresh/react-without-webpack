@@ -1,4 +1,3 @@
-'use strict'
 import {CALL_HISTORY_METHOD} from 'constants/constants'
 
 /**

@@ -1,6 +1,7 @@
-let { Helmet } = ReactHelmet
-let {bindActionCreators} = Redux
-let {connect} = ReactRedux
+import React, {Component} from 'react'
+import {Helmet} from 'react-helmet'
+import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
 
 import * as DashboardActions from './actions'
 

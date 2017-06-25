@@ -15,11 +15,28 @@ let vendorsPath = path.join(process.cwd(), 'public/js/vendors')
 
 Promise.all(external.map(
 	dependency => {
+		let dependencyVariable = dependency.split('-').map(
+			part => {
+				return (part.charAt(0).toUpperCase() + part.slice(1))
+			}
+		).join('')
+		let specific = `export default ${dependencyVariable};`
+		switch (dependency){
+			case 'immutable':
+				specific = `
+					export {default as default} from 'immutable';
+					import {default as Temp} from 'immutable';
+					let fromJS = Temp.fromJS;
+					export {fromJS};
+				`
+				break
+		}
 		return {
 			dependency,
 			text: `
 				export *  from '${dependency}';
-			`
+				import * as ${dependencyVariable} from '${dependency}';
+			` + specific
 		}
 	}
 ).map(

@@ -17,12 +17,12 @@ function warmVendors(){
 				vendorFile => {
 					if(vendorFile.endsWith('.js')){
 						vendors.push(path.join(vendorsFolder,vendorFile))
-						links.push('js/vendors/' + vendorFile)
+						links.push('js/vendors/' + vendorFile.slice(0,-3))
 					}
 				}
 			)
 			//console.log(vendors)
-			console.log(links)
+			//console.log(links)
 			cache.save('vendors', links)
 			return Promise.all(vendors.map(
 				(vendor, index) => open(vendor).then(

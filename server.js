@@ -15,7 +15,9 @@ const options = {
 
 let transformMiddleware = require('./middleware/transform/transform-middleware')
 let updater = require('./middleware/updater/updater-middleware')
-let push = require('./middleware/push/push-middleware')
+let pushStaticFiles = require('./middleware/push/push-middleware')
+let pushVendors = require('./middleware/push/push-vendors')
+let pushApp = require('./middleware/transform/push-transpiled')
 
 const port = process.env.PORT || 5000
 const server = express()
@@ -32,11 +34,14 @@ server.use(logger('dev'))
 server.use(updater)
 server.use(transformMiddleware)
 
+
 server.get('/stream', function(req, res) {
 	res.sseSetup()
 })
 
-server.use(push)
+server.use(pushStaticFiles)
+server.use(pushVendors)
+server.use(pushApp)
 
 server.get('/', function(req, res, next){
 	//console.log(cache)

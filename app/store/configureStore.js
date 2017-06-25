@@ -1,5 +1,5 @@
-let { createStore, applyMiddleware, compose } = Redux
-let thunk = ReduxThunk.default
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 
 import rootReducer from 'reducers/index.js'
 
@@ -8,7 +8,7 @@ export default function configureStore(initialState) {
 		rootReducer,
 		initialState,
 		compose(
-			applyMiddleware(thunk)
+			applyMiddleware(thunk.default)
 		)
 	)
 

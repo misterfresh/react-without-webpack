@@ -1,6 +1,7 @@
-let { Helmet } = ReactHelmet
-let {bindActionCreators} = Redux
-let {connect} = ReactRedux
+import React, {Component} from 'react'
+import {Helmet} from 'react-helmet'
+import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
 
 import * as HomeActions from './actions'
 
@@ -32,8 +33,8 @@ class Home extends Component {
         meta={[ {'name': 'description', 'content': "Welcome"} ]}
       />
 
-      <div>Seems to be hehhe</div>
-			<h3>Welcol  cool</h3>
+      <div>Seems to work</div>
+			<h3>Welcome for now</h3>
     </div>
   }
 }

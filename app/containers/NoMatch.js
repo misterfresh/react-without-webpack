@@ -1,6 +1,7 @@
-let { Helmet } = ReactHelmet
+import React, {Component} from 'react'
+import {Helmet} from 'react-helmet'
 
-class NoMatch extends React.Component {
+class NoMatch extends Component {
 
   render() {
     return (
