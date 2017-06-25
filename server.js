@@ -6,6 +6,7 @@ let folder = process.cwd()
 const http2 = require('spdy')
 const logger = require('morgan')
 const fs = require('fs')
+let cache = require('./middleware/utils/cache')
 
 const options = {
 	key: fs.readFileSync('./certificates/server.key'),
@@ -38,7 +39,8 @@ server.get('/stream', function(req, res) {
 server.use(push)
 
 server.get('/', function(req, res, next){
-	res.send(global.publicCache['index']['file'])
+	//console.log(cache)
+	res.send(cache.retrieve('index')['file'])
 })
 
 server.use(express.static(path.join(folder,'public')))

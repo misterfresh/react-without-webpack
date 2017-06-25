@@ -6,7 +6,7 @@ function sendTranspiled(res, transpiled, fromCache = false){
 	res.setHeader('Expires', '-1')
 	res.setHeader('Pragma', 'no-cache')
 	res.setHeader('Connection', "keep-alive")
-	res.append('X-Babel-Cache-Hit', fromCache)
+	res.append('X-App-Cache-Hit', fromCache)
 	res.status(200).send(transpiled)
 }
 

@@ -1,36 +1,50 @@
-let babel = require('babel-core')
-let cacheMap = {}
-let hashMap = {}
-let zlib = require('zlib')
+let cache = require('./../utils/cache')
+let path = require('path')
+let resolveToUrl = require('./resolveToUrl')
+let conf = JSON.parse(require('fs').readFileSync(
+	path.join(process.cwd(), '.babelrc'), 'utf-8')
+)
+conf.babelrc = false
+conf.plugins.push([resolveToUrl])
+
+let gzip = require('./../utils/gzip')
+let transpile = require('./../utils/transpile')
 
 let sendTranspiled = require('./sendTranspiled')
 let fileLastModifiedHash = require('./file-last-modified-hash')
 
-function transformFile(req, res, conf){
-	if(!req.url.endsWith('.js')){
-		req.url += '.js'
+function transformFile(req, res){
+	let uri = req.url.split("?").shift()
+	if(!uri.endsWith('.js')){
+		uri += '.js'
 	}
 
-	let src = process.cwd() + req.url
-	fileLastModifiedHash(src).then(
+	let src = (process.cwd() + uri).replace(/\\/gi, '/')
+	//console.log('src', src)
+	return fileLastModifiedHash(src).then(
 		lastModifiedHash => {
-			let lastKnownHash = hashMap[src]
+			let lastKnownHash = cache.retrieveHash(src)
+			//console.log('known', lastKnownHash, 'mod', lastModifiedHash)
 			if (lastKnownHash && lastKnownHash === lastModifiedHash) {
-				sendTranspiled(res, cacheMap[lastKnownHash], true)
+				sendTranspiled(res, cache.retrieve(lastKnownHash), true)
 			} else {
-				babel.transformFile(src, conf, function (err, transpiled) {
-					if(err){
-						return res.status(500).send('Error transpiling')
+
+				return transpile(src, conf).then(
+					transpiled => {
+						//console.log('transpiled', transpiled)
+						return gzip(transpiled)
 					}
-					zlib.gzip(transpiled.code, function(err, gzipped){
-						if(err){
-							return res.status(500).send('Error gzipping')
-						}
+				).then(
+					gzipped => {
+						//console.log('gzipped')
 						sendTranspiled(res, gzipped)
-						hashMap[src]=lastModifiedHash
-						cacheMap[lastModifiedHash] = gzipped
-					})
-				})
+						cache.saveHash(src, lastModifiedHash)
+						cache.save(lastModifiedHash, gzipped)
+						cache.remove(lastKnownHash)
+					}
+				).catch(
+					error => res.status(500).json(error)
+				)
 			}
 		}
 	)

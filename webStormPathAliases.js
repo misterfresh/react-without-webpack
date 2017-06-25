@@ -10,6 +10,7 @@ System.config({
         "reducers/*":"./app/reducers/*",
         "routes/*":"./app/routes/*",
         "store/*":"./app/store/*",
-        "utils/*":"./app/utils/*"
+        "utils/*":"./app/utils/*",
+			  "middleware/*":"./middleware/*"
     }
 })

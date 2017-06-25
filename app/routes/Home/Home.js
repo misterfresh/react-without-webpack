@@ -32,8 +32,8 @@ class Home extends Component {
         meta={[ {'name': 'description', 'content': "Welcome"} ]}
       />
 
-      <div>Seems to be working</div>
-			<h3>Welcome22  cool</h3>
+      <div>Seems to be hehhe</div>
+			<h3>Welcol  cool</h3>
     </div>
   }
 }
