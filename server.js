@@ -43,7 +43,10 @@ server.use(pushStaticFiles)
 server.use(pushVendors)
 server.use(pushApp)
 
-server.get('/', function(req, res, next){
+server.get('*', function(req, res, next){
+	if(req.url.endsWith('.map')){
+		return next()
+	}
 	//console.log(cache)
 	res.send(cache.retrieve('index')['file'])
 })

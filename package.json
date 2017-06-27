@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "node vendors.js",
-    "postinstall": "./node_modules/.bin/mkdirp public/js/vendors && npm run build"
+    "postinstall": "./node_modules/.bin/mkdirp public/js/vendors && npm run build && node quickfix.js"
   },
   "dependencies": {
     "aphrodite": "^1.2.1",

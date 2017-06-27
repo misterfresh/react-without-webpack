@@ -1,7 +1,5 @@
 # React without Webpack
 
-Write and Run. 
-No build, no build configuration, no build waiting.
 Using ES2015 native modules and HTTP2.
 
 ## Usage
@@ -16,8 +14,19 @@ Open
 https://localhost:5000/
 ```
 in a browser with ES2015 native modules enabled. 
-I'm using Chrome Canary with the Experimental Web Platform flag activated. Proceed after the security warning to see the page.
+Chrome Dev Channel is working, with the Experimental Web Platform flag activated. 
 
-## How it works
-Vendor dependencies are bundled in an IIFE using Rollup, before development starts.
-Then Application code is transpiled on the fly with Babel, and loaded as a module script that imports the application files as native modules.
+Proceed after the security warning to see the page.
+
+You can edit and add files in the app folder. You can add modules from npm and then import them.
+
+## Path aliasing for imports
+
+If an import is not relative (ie does not start with a point), and does not start with a slash, it is automatically prefixed with "/app". 
+```
+import routes from 'routes/Routes'
+```
+becomes
+```
+import routes from '/app/routes/Routes'
+```
