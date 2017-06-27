@@ -40,7 +40,7 @@ import react from 'js/vendors/react.js'
 ```
 
 ## How it works
-Some details in this medium article : 
+Some details in this medium article : [React without Webpack](https://medium.com/@antoine.stollsteiner/react-without-webpack-a-dream-come-true-6cf24a1ff766)
 
 ## Disclaimer
 Use at your own risk.
