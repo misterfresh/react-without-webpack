@@ -24,12 +24,23 @@ Promise.all(external.map(
 		switch (dependency){
 			case 'immutable':
 				specific = `
-					export {default as default} from 'immutable';
 					import {default as Temp} from 'immutable';
 					let fromJS = Temp.fromJS;
+					let Map = Temp.Map;
 					export {fromJS};
+					export {Map};
+					export default Temp;
 				`
 				break
+			case 'aphrodite':
+				specific = `
+					import {default as Temp} from 'aphrodite';
+					let StyleSheet = Temp.StyleSheet;
+					let css = Temp.css;
+					export {StyleSheet};
+					export {css};
+					export default Temp;
+				`
 		}
 		return {
 			dependency,

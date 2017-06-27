@@ -3,6 +3,7 @@ import {Helmet} from 'react-helmet'
 import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
+import {StyleSheet, css} from 'aphrodite'
 
 import * as DashboardActions from './actions'
 
@@ -35,6 +36,8 @@ class Dashboard extends Component {
       />
       <div>This is another page just to show that routing is working.</div>
       <Link to="/">Go to back to the home page!</Link>
+      <br/> <br/> <br/>
+      <h4 className={css(styles.title)}>A Styled Title with inline styles</h4>
     </div>
   }
 }
@@ -56,3 +59,10 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Dashboard)
+
+let styles = StyleSheet.create({
+    title: {
+      color: 'grey',
+      fontWeight: 'bold'
+    }
+})
