@@ -23,10 +23,24 @@ You can edit and add files in the app folder. You can add modules from npm and t
 ## Path aliasing for imports
 
 If an import is not relative (ie does not start with a point), and does not start with a slash, it is automatically prefixed with "/app". 
-```
+```js
 import routes from 'routes/Routes'
 ```
 becomes
-```
+```js
 import routes from '/app/routes/Routes'
 ```
+Except node_modules dependencies:
+```js
+import react from 'react'
+```
+becomes
+```js
+import react from 'js/vendors/react.js'
+```
+
+## How it works
+Some details in this medium article : 
+
+## Disclaimer
+Use at your own risk.
