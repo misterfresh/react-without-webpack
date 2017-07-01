@@ -44,10 +44,14 @@ server.use(pushVendors)
 server.use(pushApp)
 
 server.get('*', function(req, res, next){
-	if(req.url.endsWith('.map')){
+	if(req.url.endsWith('.map') || req.url.endsWith('.js')){
 		return next()
 	}
-	//console.log(cache)
+	if(req.url.startsWith('/js/')){
+		req.url += '.js'
+		return next()
+	}
+
 	res.send(cache.retrieve('index')['file'])
 })
 
