@@ -2,6 +2,8 @@
 
 Using ES2015 native modules and HTTP2.
 
+![alt text](https://i.imgur.com/2x7DpYz.gif "Pre loading JS modules with HTTP2 push")
+
 ## Usage
 ```
 git clone git@github.com:misterfresh/react-without-webpack.git
