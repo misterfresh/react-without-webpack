@@ -25,7 +25,7 @@ class fakeDb {
       if(typeof this.data[id] !== 'undefined'){
         return reject('already exists')
       }
-      this.data[id] = data
+      this.data[id] = Object.assign({}, data)
       this.saveToFile()
       return resolve(data)
     })

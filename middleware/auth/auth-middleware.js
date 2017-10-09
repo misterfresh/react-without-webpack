@@ -40,8 +40,8 @@ function authMiddleware(req, res, next) {
 
   let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   req.token =
-    !!req.cookies && req.cookies.tellnspread_token
-      ? req.cookies.tellnspread_token
+    !!req.cookies && req.cookies[`${conf.name}_token`]
+      ? req.cookies[`${conf.name}_token`]
       : false
 
   return stackTokenCalls(req, ip).spread((user, token) => {

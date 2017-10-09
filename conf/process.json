@@ -7,7 +7,7 @@
     "watch"       : true,
     "env": {
       "NODE_ENV": "development",
-      "TELLNSPREAD_ENV": "staging",
+      "MYAPP_ENV": "staging",
       "SERVER": 1
     },
     "env_production" : {

@@ -29,10 +29,10 @@ export function submitConnectForm() {
     let connectForm = getConnectForm(getState())
     dispatch(requestUser())
     return (connectForm.get('mode') === 'login'
-      ? User.login(connectForm.get('email'), connectForm.get('password'))
+      ? User.login(connectForm.get('email'), connectForm.get('pass'))
       : User.register(
           connectForm.get('email'),
-          connectForm.get('password'),
+          connectForm.get('pass'),
           connectForm.get('name')
         )
     )

@@ -70,6 +70,7 @@ class User extends Entity {
 
   login(req, res) {
     let { email, password } = this.decodeCredentials(req)
+    console.log(email, password)
     if (!email) {
       return Response.error(req, res, { message: 'missing email' })
     }
@@ -81,7 +82,7 @@ class User extends Entity {
     if (!user) {
       return Response.error(req, res, { message: 'User not found.' })
     }
-
+    console.log(user)
     let { salt, pass: passwordHash } = user
 
     let verificationHash = Pass.sha512(password, salt).passwordHash
@@ -90,10 +91,7 @@ class User extends Entity {
     }
 
     let logged = user
-    delete logged.pass
-    delete logged.salt
-    delete logged.type
-    delete logged.ip
+
     req.user = logged
     return Response.success(req, res, logged)
   }
@@ -127,14 +125,12 @@ class User extends Entity {
       email,
       name
     }
-    console.log()
+    console.log({registeredUser})
     return this.model.update(req.user.id, registeredUser).then(updated => {
-      delete updated.pass
-      delete updated.salt
-      delete updated.type
-      delete updated.ip
-      req.user = updated
-      return Response.success(req, res, updated)
+      let result = Object.assign({}, updated)
+
+      req.user = result
+      return Response.success(req, res, result)
     })
   }
 

@@ -48,7 +48,7 @@ class Api {
       let cookieConf = require('conf/conf')
       Object.assign(headers, {
         Cookie: !!this.token
-          ? `tellnspread_token=${this
+          ? `${cookieConf.name}_token=${this
               .token}; Max-Age=${cookieConf.maxAge}; Domain=${cookieConf.domain}; Path=${cookieConf.path};${cookieConf.httpOnly
               ? ' httpOnly;'
               : ''}${cookieConf ? 'Secure;' : ''}`

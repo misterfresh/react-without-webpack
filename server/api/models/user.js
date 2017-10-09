@@ -29,20 +29,14 @@ class User extends db {
       ip
     }
     return this.insert(userId, anonymousUser).then(user => {
-      delete user.pass
-      delete user.salt
-      delete user.ip
-      delete user.type
+
       return user
     })
   }
 
   registered(user) {
     return this.get(user.id).then(user => {
-      delete user.pass
-      delete user.salt
-      delete user.ip
-      delete user.type
+
       return user
     })
   }

@@ -19,6 +19,7 @@ class User extends Entity {
   }
 
   register(email, password, name) {
+    console.log(email, password, name)
     return this.post(this.uri + '/register', {
       headers: {
         Authorization:
