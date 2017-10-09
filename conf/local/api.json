@@ -1,0 +1,4 @@
+{
+  "secret": "yoursecretrandomstring",
+  "issuer": "https://myapp.local"
+}

@@ -1,0 +1,11 @@
+{
+    "env": "staging",
+    "front": "https://myapp.com/",
+    "api": "https://api.myapp.com/",
+    "assets": "https://myapp.com/",
+    "domain": "myapp.com",
+    "maxAge": 36000000,
+    "httpOnly": true,
+    "path":"/",
+    "secure": true
+}

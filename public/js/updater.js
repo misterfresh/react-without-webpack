@@ -1,6 +1,10 @@
-let source = new EventSource("stream")
+let source = new EventSource('/stream')
 
-source.addEventListener('message', function (event) {
-  console.log('updating!', event.data)
-	location.reload(true)
-}, false)
+source.addEventListener(
+  'message',
+  function(event) {
+    console.log('updating!', event.data)
+    location.reload(true)
+  },
+  false
+)

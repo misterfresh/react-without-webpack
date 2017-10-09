@@ -1,13 +1,10 @@
-import ConfirmPopup from 'components/Popup/ConfirmPopup'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-const confirm = function(
-  event, action, options, abort = null
-) {
+import ConfirmPopup from 'components/popup/confirmPopup'
 
-  event.preventDefault()
-  event.stopPropagation()
-
-  let {title, message, confirmLabel, abortLabel, style} = options
+const confirm = function(action, options, abort = null) {
+  let { title, message, confirmLabel, abortLabel, style } = options
 
   let wrapper = document.body.appendChild(document.createElement('div'))
   let cleanup = function() {
@@ -17,7 +14,7 @@ const confirm = function(
     })
   }
 
- ReactDOM.render(
+  ReactDOM.render(
     <ConfirmPopup
       title={title}
       action={action}
@@ -27,9 +24,9 @@ const confirm = function(
       abortLabel={abortLabel}
       close={cleanup}
       style={style}
-    />, wrapper
+    />,
+    wrapper
   )
-
 }
 
 export default confirm

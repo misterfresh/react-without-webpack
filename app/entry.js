@@ -1,29 +1,28 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hydrate } from 'react-dom'
 
-import {browserHistory} from 'react-router'
+import { createBrowserHistory } from 'history'
+import { StyleSheet } from 'aphrodite'
+import { fromJS } from 'immutable'
 
-import {fromJS} from 'immutable'
+import routerMiddleware from 'route/middleware'
 
-import { syncHistoryWithStore } from 'react-router-redux';
+import Root from 'main/containers/root'
+import configureStore from 'main/store/configureStore'
 
-import routes from 'routes/Routes'
-import Root from 'containers/Root'
-import configureStore from 'store/configureStore'
+let initialState = window._INITIAL_STATE_ || {}
+let history = createBrowserHistory()
 
-let initialState = {}
+const store = configureStore(fromJS(initialState), routerMiddleware(history))
 
-const store = configureStore(fromJS(initialState))
+StyleSheet.rehydrate(window.renderedClassNames)
 
-const history = syncHistoryWithStore(browserHistory, store, {
-	selectLocationState (state) {
-		return state.get('route').toJS();
-	}
-})
-
-ReactDOM.render(
-	<Root store={store} history={history} routes={routes} />,
-	document.getElementById('root')
+hydrate(
+	<Root store={store} history={history} />,
+  document.getElementById('root')
 )
+
+delete window._INITIAL_STATE_
+delete window.renderedClassNames
 
 

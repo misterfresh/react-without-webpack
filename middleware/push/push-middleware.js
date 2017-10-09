@@ -1,29 +1,25 @@
-let path = require('path')
-let push = require('./../utils/push')
-let cache = require('./../utils/cache')
-
-let publicFolder = path.join(process.cwd(), 'public')
-let source = path.join(publicFolder, "index.html")
+let push = require('./../file/push')
+let cache = require('./../file/cache')
 
 let warmPublicCache = require('./warm-public-cache')
-warmPublicCache(source)
+warmPublicCache()
+let warmAppCache = require('./warm-app-cache')
+warmAppCache()
 
-function pushLink(req, res, next){
-	if(req.url.endsWith('.map') || req.url.startsWith('/stream')){
-		return next()
-	}
-	return Promise.all(cache.retrieve('public').map(
-		link => {
-			if(link === 'index'){
-				return
-			}
-			//console.log(link)
-			push(res,  '/' + link, cache.retrieve(link)['file'], cache.retrieve(link)['type'])
-		}
-	)).then(
-		pushed => next()
-	)
-
+function pushMiddleware(req, res, next) {
+  if (req.url.endsWith('.map') || req.url.startsWith('/stream')) {
+    return next()
+  }
+  let links = cache.getAll('links')
+  console.log('push links')
+  return Promise.all(
+    Object.keys(links).map(link => {
+      if (link.endsWith('index.html')) {
+        return
+      }
+      push(res, link, links[link]['file'], links[link]['type'])
+    })
+  ).then(pushed => next())
 }
 
-module.exports = pushLink
+module.exports = pushMiddleware

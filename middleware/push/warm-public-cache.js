@@ -1,40 +1,35 @@
 let path = require('path')
-let open = require('./../utils/open')
-let gzip = require('./../utils/gzip')
-let cache = require('./../utils/cache')
-
-let getContentType = require('./get-content-type')
-let getFileLinks = require('./get-file-links')
+let read = require('./../file/read')
+let gzip = require('./../file/gzip')
+let cache = require('./../file/cache')
+let list = require('./../file/list')
+let getContentType = require('./../file/get-content-type')
 
 let publicFolder = path.join(process.cwd(), 'public')
 
-function warmPublioCache(source){
-	return open(source, "utf8").then(
-		index => {
-			let links = getFileLinks(index)
-			cache.save('public', links)
+function warmPublicCache() {
+  return list(
+    `${publicFolder}/**/*.@(js|png|jpg|css|eot|svg|ttf|woff|woff2|ico|html)`,
+    {}
+  )
+    .then(files =>
+      Promise.all(
+        files.map(file => {
+          let replaced = file.replace(/\\/gi, '/')
+          let link = replaced.split('public')[1]
 
-			return Promise.all(links.map(
-				link => {
-					let linkPath = path.join(publicFolder, link)
-
-					return open(linkPath).then(
-						file => gzip(file)
-					).then(
-						zipped => cache.save(link, {
-							file: zipped,
-							type: getContentType(link)
-						})
-					)
-				}
-			)).then(
-				warmed => cache.save('index', {
-					file: index,
-					type: 'text/html'
-				})
-			)
-		}
-	)
+          return read(file)
+            .then(data => gzip(data))
+            .then(gzipped =>
+              cache.set('links', link, {
+                file: gzipped,
+                type: getContentType(link)
+              })
+            )
+        })
+      )
+    )
+    .then(warmed => console.log('warmed public'))
 }
 
-module.exports = warmPublioCache
+module.exports = warmPublicCache

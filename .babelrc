@@ -1,3 +1,33 @@
 {
-  "presets": ["react"]
+  "presets": ["react"],
+  "plugins": [
+    ["transform-class-properties"],
+    ["syntax-object-rest-spread"],
+    ["transform-es2015-modules-commonjs"],
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "main": "./app/modules/main",
+        "user": "./app/modules/user",
+        "job": "./app/modules/job",
+        "display": "./app/modules/display",
+        "route": "./app/modules/route",
+        "organization": "./app/modules/organization",
+        "routes": "./app/routes",
+        "api": "./app/api",
+        "middleware": "./middleware",
+        "conf": "./conf",
+        "public": "./public",
+        "server": "./server",
+        "components": "./app/components",
+        "styles": "./app/styles",
+        "utils": "./app/utils",
+        "db": "./server/api/db/fakeDb.js",
+        "models": "./server/api/models",
+        "api/routes": "./server/api/routes",
+        "api/utils": "./server/api/utils",
+        "response": "./server/api/utils/response.js"
+      }
+    }]
+  ]
 }
