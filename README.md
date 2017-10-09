@@ -1,6 +1,6 @@
 # React without Webpack
 
-Using ES2015 native modules and HTTP2. Updated with React 16, React-Router 4, and Redux.
+Using ES2015 native modules and HTTP2. Updated with React 16, React-Router 4, Redux, and server side rendering.
 
 ![alt text](https://i.imgur.com/2x7DpYz.gif "Pre loading JS modules with HTTP2 push")
 
