@@ -32,7 +32,7 @@ class UserConnect extends PureComponent {
 
     return (
       <div className={css(styles.connect)}>
-        {user.get('email') ? (
+        {(!!user && user.get('email')) ? (
           <NavLink
             key={'navlink-user'}
             title={user.get('name')}

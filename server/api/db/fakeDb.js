@@ -27,7 +27,7 @@ class fakeDb {
       }
       this.data[id] = Object.assign({}, data)
       this.saveToFile()
-      return resolve(data)
+      return resolve(Object.assign({}, data))
     })
   }
 
@@ -37,7 +37,7 @@ class fakeDb {
       if(typeof this.data[id] === 'undefined'){
         return reject('not found')
       }
-      return resolve(this.data[id])
+      return resolve(Object.assign({}, this.data[id]))
     })
   }
 

@@ -28,17 +28,11 @@ class User extends db {
       emailVerified: false,
       ip
     }
-    return this.insert(userId, anonymousUser).then(user => {
-
-      return user
-    })
+    return this.insert(userId, anonymousUser)
   }
 
   registered(user) {
-    return this.get(user.id).then(user => {
-
-      return user
-    })
+    return this.get(user.id)
   }
 
   createToken(user) {
