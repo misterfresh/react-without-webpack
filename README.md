@@ -1,35 +1,35 @@
 # React without Webpack
 
-Using ES2015 native modules and HTTP2. Updated with React 16, React-Router 4, Redux, and server side rendering.
+The lightest React Starter Kit. Using native modules, we can avoid bundling and have instant reloading during development.
 
-![alt text](https://i.imgur.com/2x7DpYz.gif "Pre loading JS modules with HTTP2 push")
+![alt text](https://i.imgur.com/fVjl1jV.gif "Loading native JS modules")
 
-## Usage
-```
+### Usage
+#### 1. Installation
+Clone the project and install dependencies.
+```bash
 git clone git@github.com:misterfresh/react-without-webpack.git
 cd react-without-webpack
 npm install
+```
+#### 2. Development
+Start the development server, edit the code in the /src folder.
+```bash
 npm run dev
 ```
-Add in etc/hosts file the following (we use a local domain instead of localhost, to put the api server on a subdomain instead of ports) :
+#### 3. Deploy
+Build the project:
+```bash
+npm run build
 ```
-127.0.0.1			myapp.local
-127.0.0.1			api.myapp.local
+Run the built project:
+```bash
+npm run local
 ```
-Open
-```
-https://myapp.local
-```
-in a browser with ES2015 native modules enabled. 
-Chrome Dev Channel is working, with the Experimental Web Platform flag activated. 
+Deploy to GitHub Pages by pushing to a "gh-pages" branch.
 
-Proceed after the security warning to see the page. You will also need to go to api.myapp.local and accept a security exception so that the https backend can also work with the self-signed certificate.
-
-You can edit and add files in the /app folder. You can add modules from npm and then import them.
-
-## Path aliasing for imports
-
-This is configured in the .babelrc file in the project root folder.
-
-## How it works
+### How it works
 Some details in this medium article : [React without Webpack](https://medium.com/@antoine.stollsteiner/react-without-webpack-a-dream-come-true-6cf24a1ff766)
+
+Live demo here: 
+http://misterfresh.github.io/react-drive-cms/
